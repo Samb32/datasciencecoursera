@@ -1,0 +1,152 @@
+Code Book for Run_analysis.R
+
+Data Tables:
+
+merged_test_data and merged_train data: Variables
+
+1. subject_id
+  - The numeric identifier of test/train subjects
+
+2. activity_type
+  - The numeric identifier of the type of activity 1-6
+
+3. activity_type_detailed
+  - The detailed type of activity corresponding to the numeric activity_type 
+
+4. x_phone_acc
+  - Phone acceleration on the x-axis
+  
+5. x_phone_acc_mu
+  - The mean of the corresponding x_phone_acc row
+
+6. x_phone_acc_sd
+  - The standard deviation of the corresponding x_phone_acc row
+
+7. y_phone_acc
+  - Phone acceleration on the y-axis
+
+8. y_phone_acc_mu
+  -The mean of the corresponding y_phone_acc row
+
+9. y_phone_acc_sd
+  -The standarad deviation of the the corresponding y_phone_acc row
+
+10. z_phone_acc
+    -Phone acceleration on the z-axis
+    
+11. z_phone_acc_mu
+    -The mean of the corresponding z_phone_acc row
+
+12. z_phone_acc_sd
+    -The standard deviation of the corresponding z_phone_acc row
+
+13. x_body_acc
+  - Body acceleration on the x-axis
+  
+14. x_body_acc_mu
+  - The mean of the corresponding x_body_acc row
+
+15. x_body_acc_sd
+  - The standard deviation of the corresponding x_body_acc row
+
+16. y_body_acc
+  - Body acceleration on the y-axis
+
+17. y_body_acc_mu
+  -The mean of the corresponding y_body_acc row
+
+18. y_body_acc_sd
+  -The standarad deviation of the the corresponding y_body_acc row
+
+19. z_body_acc
+    -Body acceleration on the z-axis
+
+20. z_body_acc_mu
+    -The mean of the corresponding z_body_acc row
+
+21. z_body_acc_sd
+    -The standard deviation of the corresponding z_body_acc row
+
+22. x_body_vel
+  - Body velocity on the x-axis
+  
+23. x_body_vel_mu
+  - The mean of the corresponding x_body_vel row
+
+24. x_body_vel_sd
+  - The standard deviation of the corresponding x_body_vel row
+
+25. y_body_vel
+  - Body velocity on the y-axis
+
+26. y_body_vel_mu
+  -The mean of the corresponding y_body_vel row
+
+27. y_body_vel_sd
+  -The standarad deviation of the the corresponding y_body_vel row
+
+28. z_body_vel
+    -Body velocity on the z-axis
+
+29. z_body_vel_mu
+    -The mean of the corresponding z_body_vel row
+
+30. z_body_vel_sd
+    -The standard deviation of the corresponding z_body_vel row
+
+31. x_test/train_sets
+    -The aggregrate test sets of each activty by subject id
+
+32. x_test/train_sets_mu
+    -The mean of the corresponding x_test_sets row
+
+33. x_test/train_sets_sd
+    -The standard deviation of the corresponding x_test/train_sets row
+
+merged_test_sets and merged_train_sets data: Variables
+
+1. subject_id
+  - The numeric identifier of test/train subjects
+
+2. activity_type_detailed
+  - The detailed type of activity corresponding to the subject_id
+
+3. x_phone_acc_mu
+  -The mean of phone acceleration on the x-axis of the corresponding 
+  subject_id row and activity_type_detailed row
+
+4. y_phone_acc_mu
+  -The mean of phone acceleration on the y-axis of the corresponding 
+  subject_id row and activity_type_detailed row
+
+5. z_phone_acc_mu
+  -The mean of phone acceleration on the z-axis of the corresponding
+  subject_id row and activity_type_detailed row
+
+6. x_body_acc_mu
+  -The mean of body acceleration on the x-axis of the corresponding 
+  subject_id row and activity_type_detailed row
+
+7. y_body_acc_mu
+  -The mean of body acceleration on the y-axis of the corresponding 
+  subject_id row and activity_type_detailed row
+
+8. z_body_acc_mu
+  -The mean of body acceleration on the z-axis of the corresponding
+  subject_id row and activity_type_detailed row
+
+9. x_vel_acc_mu
+  -The mean of body acceleration on the x-axis of the corresponding 
+  subject_id row and activity_type_detailed row
+
+10. y_vel_acc_mu
+    -The mean of body acceleration on the y-axis of the corresponding 
+    subject_id row and activity_type_detailed row
+
+11. z_vel_acc_mu
+    -The mean of body acceleration on the z-axis of the corresponding
+    subject_id row and activity_type_detailed row
+
+12. x_test/train_sets_mu
+    -The mean of the test/train sets of the corresponding subject_id row and 
+    activity_type_detailed row
