@@ -1,0 +1,129 @@
+# PA1_template
+Samuel Baird
+
+## Loading in the Dataset
+
+Let's first load in the data by creating a filepath object, loading the data.table package, and finally creating the data.table object (dt) using the fread function of the data.table package on the filepath object.
+```{r}
+
+filepath <- "C:/Users/samuel.baird/OneDrive - Cardinal Health/Documents/R Programming/datasciencecoursera/Reproducible/repdata_data_activity/activity.csv"
+
+library(data.table)
+
+dt <- fread(file = filepath)
+
+
+```
+
+
+## Creating a Histogram of Steps Per Day
+
+First, we remove all NA values from the dt. Then, we load in the ggplot package to plot the histogram. lastly, we plot the histogram of steps per day using the ggplot package.
+```{r}
+dt <- dt[!is.na(steps),] 
+
+library(ggplot2) 
+
+ggplot(data = dt, 
+       mapping = aes(x = steps) 
+       ) +
+  geom_histogram(binwidth = 20, 
+                   color = "black", 
+                 fill = "steelblue" 
+                 ) +
+  labs(title = "Histogram of Steps Taken per Day", 
+       x = "Steps per Day", 
+       y = "Frequency" 
+       ) +
+  theme_minimal() 
+```
+
+## Mean and Median Steps per Day
+
+To determine the mean and median step per day, we first create an object (mean_steps_day) that include the mean steps by each day in the data table (dt). We then print the object to ensure we have correctly identified the mean steps by each day. 
+
+Next, we do the same thing but now to determine the median steps per day in the median_steps_day object.
+```{r}
+mean_steps_day <- dt[, mean(steps), date] 
+print(mean_steps_day)
+median_steps_day <- dt[, median(steps), date]  
+print(median_steps_day)
+```
+
+# Time Series Plot:Average Steps Taken Per Day
+
+For interpretibility, we'll change the V1 column in the object mean_steps_day to "Steps". Now we will plot the object mean_steps_day with the x-axis as the date and the y-axis as the steps taken by date. This will use geom_line and geom_point so that we can see each day and the fluctutation in the mean steps taken throughout the length of the timeperiod provided in the data. 
+
+```{r}
+
+setnames(x = mean_steps_day, old = "V1", new = "Steps")
+
+ggplot(data = mean_steps_day, 
+       mapping = aes(x = date, 
+                     y = Steps) 
+       ) +
+  geom_line() + 
+  geom_point() +  
+  labs(title = "Daily Average Steps", 
+                      x = "Date",
+                      y = "Average Steps"
+                      ) +
+  theme_minimal() 
+```
+
+# 5-min int mean max steps
+
+To determine the max mean steps taken by every 5-minute interval, we will first create an object (mean_steps) that includes the mean steps by every interval. Then, we will determine which row in this object contains the maximum mean steps using the which.max function and creating an object that contains the information for the interval and value of the max mean interval. 
+```{r}
+mean_steps <- dt[, mean(steps), interval] 
+print(mean_steps)
+max_mean_steps <- mean_steps[which.max(V1)]
+print(max_mean_steps)
+```
+
+# Histogram of Steps with Imputation
+
+To impute the data, we will first create a new data.table object (dt2) that includes all NA values. We then inspect dt2 to determine which columns have NA values. From this, we determine that only the Steps variable contains NA values. We will also determine the class of steps to decide on which imputation method to use. As the class of the variables steps is numeric (Euclidean distace), we will impute using the mean. We will also inspect the total number of NA values to be imputed. Now, we will impute every missing value in the column steps, with the mean of steps determined without NA values. Finally, we will plot the entire dataset with the included missing values imputed by the step mean. 
+
+```{r, results='hide'}
+
+dt2 <- fread(input = filepath)
+
+is.na(dt2) 
+dt2[, class(steps)] 
+
+dt2$steps[is.na(dt2$steps)] <- mean(dt2$steps, na.rm = TRUE)
+
+steps_per_day <- dt2[, steps, date]
+ggplot(data = steps_per_day, mapping = aes(x = steps)) +
+  geom_histogram(colour = "black", 
+                 fill = "steelblue") +
+  labs(title = "Histogram of Steps per day with Imputed Data",
+       x = "Steps per day",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+# Average Steps by Weekend/Weekday
+
+
+To plot the average steps by weekend or weekday, we first create a new variable "Weekdays" using the weekdays function and apply it to the variable date in our data table. Next, we create a "Weekend" variable that is everything in the "Weekday" variable that only includes "Saturday" or "Sunday". We can now plot both the average steps for the Weekdays and Weekend days by using the facet_wrap function in ggplot. 
+```{r}
+
+dt2[, Weekdays := weekdays(date)]
+
+dt2[, Weekends := ifelse(Weekdays %in% c("Saturday", "Sunday"), 
+                         yes = "Weekend", 
+                         no = "Weekday")]
+
+ggplot(data = dt2, mapping = aes(x = interval, 
+                                 y = steps)) +
+         stat_summary(fun = mean, 
+                      geom = "point") +
+         stat_summary(fun = mean, 
+                      geom = "line") + 
+         theme_minimal() +
+  facet_wrap(~Weekends) + 
+  labs(title = "Average Steps by Weekend or Weekday", 
+       x = "5-Minute Intervals",
+       y = "Average Steps per Day")
