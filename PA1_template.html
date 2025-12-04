@@ -122,10 +122,8 @@ section.footnotes {
 <pre><code class="language-r">filepath &lt;- &quot;Reproducible/repdata_data_activity/activity.csv&quot;
 
 library(data.table)
-</code></pre>
-<pre><code>## data.table 1.17.8 using 4 threads (see ?getDTthreads).  Latest news: r-datatable.com
-</code></pre>
-<pre><code class="language-r">dt &lt;- fread(file = filepath)
+
+dt &lt;- fread(file = filepath)
 </code></pre>
 <h2 id="sec:creating-a-histogram-of-steps-per-day">Creating a Histogram of Steps Per Day</h2>
 <p>First, we remove all NA values from the dt. Then, we load in the ggplot package to plot the histogram. lastly, we plot the histogram of steps per day using the ggplot package.</p>
