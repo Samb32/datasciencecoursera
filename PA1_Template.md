@@ -9,7 +9,13 @@ Let's first load in the data by creating a filepath object, loading the data.tab
 filepath <- "Reproducible/repdata_data_activity/activity.csv"
 
 library(data.table)
+```
 
+```
+## data.table 1.17.8 using 4 threads (see ?getDTthreads).  Latest news: r-datatable.com
+```
+
+``` r
 dt <- fread(file = filepath)
 ```
 
